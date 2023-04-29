@@ -1,31 +1,31 @@
 local states = {
-    "AC",
-    "AL",
-    "AM",
-    "AP",
-    "BA",
-    "CE",
-    "DF",
-    "ES",
-    "GO",
-    "MA",
-    "MG",
-    "MS",
-    "MT",
-    "PA",
-    "PB",
-    "PE",
-    "PI",
-    "PR",
-    "RJ",
-    "RN",
-    "RO",
-    "RR",
-    "RS",
-    "SC",
-    "SE",
-    "SP",
-    "TO"
+    AC = 1,
+    AL = 2,
+    AM = 3,
+    AP = 4,
+    BA = 5,
+    CE = 6,
+    DF = 7,
+    ES = 8,
+    GO = 9,
+    MA = 10,
+    MG = 11,
+    MS = 12,
+    MT = 13,
+    PA = 14,
+    PB = 15,
+    PE = 16,
+    PI = 17,
+    PR = 18,
+    RJ = 19,
+    RN = 20,
+    RO = 21,
+    RR = 22,
+    RS = 23,
+    SC = 24,
+    SE = 25,
+    SP = 26,
+    TO = 27
 }
 
 local ranges = {
@@ -59,17 +59,33 @@ local ranges = {
 }
 
 return function(options)
-    local state = options.state or math.random(1, #states)
-    local formated = options.formated or true
+  local state, index = options.state, 0
 
-    local rangeSet = ranges[state]
-    local range = rangeSet[math.random(1, #rangeSet)]
+  if state then
+    index = states[state:upper()]
+  else
+    index = math.random(1, #ranges)
+  end
 
-    local cep = math.random(range[1], range[2])
+  local format = options.format or true
 
-    if formated then
-        return string.format('%s-%s', string.sub(cep, 1, 5), string.sub(cep, 6))
-    end
+  if format == "false" then
+    format = false
+  end
 
-    return cep
+  local rangeSet = ranges[index]
+
+  if not rangeSet then
+    error("Invalid state")
+  end
+
+  local range = rangeSet[math.random(1, #rangeSet)]
+
+  local cep = math.random(range[1], range[2])
+
+  if format then
+      return string.format('%s-%s', string.sub(cep, 1, 5), string.sub(cep, 6))
+  end
+
+  return cep
 end

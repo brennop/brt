@@ -15,9 +15,11 @@ end
 
 return function(options)
   local region = options.region
-  local formated = options.formated
+  local format = options.format or true
 
-  if formated == nil then formated = true end
+  if format == "false" then
+    format = false
+  end
 
   local cpf = ''
   for i = 1, 8 do
@@ -29,7 +31,7 @@ return function(options)
   if region == nil then
     num = math.random(0, 9)
   else
-    num = region
+    num = tonumber(region)
   end
   cpf = cpf .. tostring(num)
 
@@ -38,7 +40,7 @@ return function(options)
   -- segundo digito de verificação
   cpf = cpf .. generateDigit(string.sub(cpf, 2, 10))
 
-  if formated then
+  if format then
     return string.format('%s.%s.%s-%s', string.sub(cpf, 1, 3), string.sub(cpf, 4, 6), string.sub(cpf, 7, 9), string.sub(cpf, 10))
   end
 

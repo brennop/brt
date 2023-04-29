@@ -19,8 +19,12 @@ local function generateDigit(data, index)
 end
 
 return function(options)
-  local formated = options.formated or true
+  local format = options.format or true
   local suffix = options.suffix or "0001"
+
+  if format == "false" then
+    format = false
+  end
 
   local cnpj = ''
   for i = 1, 8 do
@@ -35,7 +39,7 @@ return function(options)
   -- segundo digito de verificação
   cnpj = cnpj .. generateDigit(string.sub(cnpj, 1, 13), 2)
 
-  if formated then
+  if format then
     return string.format('%s.%s.%s/%s-%s', string.sub(cnpj, 1, 2), string.sub(cnpj, 3, 5), string.sub(cnpj, 6, 8), string.sub(cnpj, 9, 12), string.sub(cnpj, 13))
   end
 
