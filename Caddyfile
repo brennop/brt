@@ -1,4 +1,4 @@
-http://brt.fly.dev {
+http://{$SITE_ADDRESS} {
   auto_https off
   reverse_proxy localhost:3000
 }

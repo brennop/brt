@@ -12,6 +12,7 @@ processes = []
 [build]
 
 [env]
+  SITE_ADDRESS = "brt.fly.dev"
 
 [experimental]
   auto_rollback = true
