@@ -1,4 +1,4 @@
-function generateDigit(digits)
+local function generateDigit(digits)
   local sum = 0
   for i = 1, 9 do
     local num = tonumber(string.sub(digits, i, i))
