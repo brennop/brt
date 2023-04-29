@@ -2,7 +2,7 @@ function generateDigit(digits)
   local sum = 0
   for i = 1, 9 do
     local num = tonumber(string.sub(digits, i, i))
-    sum = sum + (10 - i) * num
+    sum = sum + (11 - i) * num
   end
 
   local rest = sum % 11
