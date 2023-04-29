@@ -36,9 +36,19 @@ local messages = {
 
 local function match_handler(pattern)
   for key, handler in pairs(http.handlers) do
-    local match = pattern:match(key .. "$")
+    local path, query = pattern:match("([^%?]+)%?(.*)$")
+    local match = (path or pattern):match(key .. "$")
     if match then
-      return handler({}, match)
+      local params = { }
+      if query then
+        for k, v in query:gmatch("([^=&]+)=([^=&]+)") do
+          if v == "false" then v = false
+          elseif v == "true" then v = true
+          elseif tonumber(v) then v = tonumber(v) end
+          params[k] = v
+        end
+      end
+      return handler(params, match)
     end
   end
 

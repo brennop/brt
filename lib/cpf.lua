@@ -14,8 +14,10 @@ local function generateDigit(digits)
 end
 
 return function(options)
-  local region = options.region or -1
-  local punctuated = options.punctuated or true
+  local region = options.region
+  local formated = options.formated
+
+  if formated == nil then formated = true end
 
   local cpf = ''
   for i = 1, 8 do
@@ -24,7 +26,7 @@ return function(options)
   end
 
   local num
-  if region == -1 then
+  if region == nil then
     num = math.random(0, 9)
   else
     num = region
@@ -36,7 +38,7 @@ return function(options)
   -- segundo digito de verificação
   cpf = cpf .. generateDigit(string.sub(cpf, 2, 10))
 
-  if punctuated then
+  if formated then
     return string.format('%s.%s.%s-%s', string.sub(cpf, 1, 3), string.sub(cpf, 4, 6), string.sub(cpf, 7, 9), string.sub(cpf, 10))
   end
 
