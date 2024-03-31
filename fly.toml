@@ -12,7 +12,7 @@ processes = []
 [build]
 
 [env]
-  SITE_ADDRESS = "brt.fly.dev"
+  SITE_ADDRESS = "gerador.top"
 
 [experimental]
   auto_rollback = true

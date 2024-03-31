@@ -2,7 +2,7 @@ local message =
 [[brt
 
 TL;DR
-  curl brt.fly.dev/cpf
+  curl gerador.top/cpf
 
 TOOLS
   /cpf
